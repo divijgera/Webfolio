@@ -3,15 +3,63 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, ChevronDown } from "lucide-react";
-import { Container } from "../layout/Container";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/Button";
 import { siteConfig } from "@/lib/constants";
+
+const HERO_ROLES = [
+  "build things for the web",
+  "craft clean, modern UI",
+  "ship full-stack products",
+  "solve complex problems",
+];
 
 /**
  * Hero Section Component
  * Landing section with animated heading and CTA buttons
  */
 export function Hero() {
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [typedText, setTypedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const fullText = HERO_ROLES[roleIndex];
+    const typingSpeed = 110;
+    const deletingSpeed = 70;
+    const pauseTime = 1600;
+
+    let delay = isDeleting ? deletingSpeed : typingSpeed;
+
+    if (!isDeleting && typedText === fullText) {
+      delay = pauseTime;
+    }
+
+    const timeout = setTimeout(() => {
+      if (!isDeleting && typedText !== fullText) {
+        setTypedText(fullText.slice(0, typedText.length + 1));
+        return;
+      }
+
+      if (isDeleting && typedText !== "") {
+        setTypedText(fullText.slice(0, typedText.length - 1));
+        return;
+      }
+
+      if (!isDeleting && typedText === fullText) {
+        setIsDeleting(true);
+        return;
+      }
+
+      if (isDeleting && typedText === "") {
+        setIsDeleting(false);
+        setRoleIndex((prev) => (prev + 1) % HERO_ROLES.length);
+      }
+    }, delay);
+
+    return () => clearTimeout(timeout);
+  }, [typedText, isDeleting, roleIndex]);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -67,7 +115,11 @@ export function Hero() {
               {siteConfig.author.name}
             </span>
             <span className="block text-secondary text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight">
-              I build things for the web
+              I&nbsp;
+              <span className="inline-flex items-center">
+                {typedText}
+                <span className="ml-1 inline-block h-[1em] w-[2px] bg-accent animate-pulse" />
+              </span>
             </span>
           </motion.h1>
 
