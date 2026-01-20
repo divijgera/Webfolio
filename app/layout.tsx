@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SocialSidebar } from "@/components/layout/SocialSidebar";
+import { Atmosphere } from "@/components/layout/Atmosphere";
 import { siteConfig } from "@/lib/constants";
 
 const geistSans = Geist({
@@ -75,6 +76,7 @@ export default function RootLayout({
         >
           <div className="flex flex-col min-h-screen w-full">
             <Header />
+            <Atmosphere />
             <main className="flex-1 w-full">
               {children}
             </main>
