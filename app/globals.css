@@ -15,6 +15,9 @@
   --success: #10b981;
   --warning: #f59e0b;
   --error: #ef4444;
+
+  /* Layout */
+  --header-height: 80px;
 }
 
 :root.dark {

@@ -19,8 +19,8 @@ export function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-6 right-6 sm:left-8 sm:right-8 md:left-12 md:right-12 z-50 bg-background/80 backdrop-blur-lg border-b border-border/50">
-        <div className="max-w-screen-2xl mx-auto">
+      <header className="fixed top-0 left-0 right-0 w-full z-50 flex justify-center bg-background/80 backdrop-blur-lg border-b border-border/50">
+        <div className="w-[95%] max-w-screen-2xl">
           <div className="flex items-center justify-between h-20">
             {/* Logo - Left */}
             <Link
@@ -82,9 +82,9 @@ export function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-20 left-6 right-6 sm:left-8 sm:right-8 md:left-12 md:right-12 z-40 md:hidden bg-background/95 backdrop-blur-lg border-b border-border"
+            className="fixed top-20 left-0 right-0 w-full z-40 md:hidden bg-background/95 backdrop-blur-lg border-b border-border"
           >
-            <div className="max-w-screen-2xl mx-auto py-6">
+            <div className="w-[95%] max-w-screen-2xl mx-auto py-6">
               <nav className="space-y-1">
                 {siteConfig.navigation.map((item) => (
                   <Link
