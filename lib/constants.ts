@@ -11,10 +11,11 @@ export const siteConfig = {
     twitter: "https://twitter.com/yourusername",
   },
   navigation: [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Projects", href: "/projects" },
-    { name: "Contact", href: "/contact" },
+    { name: "Home", href: "/#home", id: "home" },
+    { name: "About", href: "/#about", id: "about" },
+    { name: "Skills", href: "/#skills", id: "skills" },
+    { name: "Projects", href: "/#projects", id: "projects" },
+    { name: "Contact", href: "/#contact", id: "contact" },
   ],
 };
 

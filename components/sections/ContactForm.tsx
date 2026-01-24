@@ -51,7 +51,7 @@ export function ContactForm() {
   };
 
   return (
-    <section className="py-16 md:py-24 flex justify-center">
+    <section id="contact" className="min-h-screen py-16 md:py-24 flex justify-center scroll-mt-24">
       <div className="w-[95%] max-w-screen-2xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}

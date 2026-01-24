@@ -9,7 +9,7 @@ export function Projects() {
   const otherProjects = projects.filter(p => !p.featured);
 
   return (
-    <section className="py-16 md:py-24 flex justify-center">
+    <section id="projects" className="min-h-screen py-16 md:py-24 flex justify-center scroll-mt-24">
       <div className="w-[95%] max-w-screen-2xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

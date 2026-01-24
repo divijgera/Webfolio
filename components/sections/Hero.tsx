@@ -84,7 +84,10 @@ export function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen w-full flex items-center justify-center px-6 md:px-12">
+    <section
+      id="home"
+      className="relative min-h-screen w-full flex items-center justify-center px-6 md:px-12 scroll-mt-24"
+    >
       {/* Gradient Background */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse" />

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
+import { SmoothScrollProvider } from "@/components/layout/SmoothScrollProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SocialSidebar } from "@/components/layout/SocialSidebar";
@@ -74,15 +75,17 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex flex-col min-h-screen w-full">
-            <Header />
-            <Atmosphere />
-            <main className="flex-1 w-full">
-              {children}
-            </main>
-            <Footer />
-            <SocialSidebar />
-          </div>
+          <SmoothScrollProvider>
+            <div className="flex flex-col min-h-screen w-full">
+              <Header />
+              <Atmosphere />
+              <main className="flex-1 w-full">
+                {children}
+              </main>
+              <Footer />
+              <SocialSidebar />
+            </div>
+          </SmoothScrollProvider>
         </ThemeProvider>
       </body>
     </html>
