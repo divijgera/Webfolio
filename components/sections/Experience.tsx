@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { X } from "lucide-react";
 import dynamic from "next/dynamic";
 
@@ -60,6 +60,14 @@ const experiences: Experience[] = [
  */
 export function Experience() {
   const [openCard, setOpenCard] = useState<string | null>(null);
+  const scrollRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
+  // Reset scroll position when a card is opened
+  useEffect(() => {
+    if (openCard && scrollRefs.current[openCard]) {
+      scrollRefs.current[openCard]!.scrollTop = 0;
+    }
+  }, [openCard]);
 
   return (
     <section id="experience" className="sec-pad bg-background">
@@ -122,6 +130,7 @@ export function Experience() {
 
                   {/* Scrollable Content */}
                   <div 
+                    ref={(el) => { scrollRefs.current[exp.companyKey] = el; }}
                     className="h-full overflow-y-auto"
                     style={{ padding: '40px 36px' }}
                   >
