@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { siteConfig } from "@/lib/constants";
 import Aurora from "@/components/animations/Aurora";
+import Antigravity from "@/components/animations/Antigravity";
 
 const HERO_ROLES = [
   "build things for the web",
@@ -85,6 +86,11 @@ export function Hero() {
             speed={0.5}
           />
         </div>
+      )}
+
+      {/* Antigravity Particles for Light Mode */}
+      {isMounted && resolvedTheme === "light" && (
+        <Antigravity particleCount={80} particleColor="#4285F4" />
       )}
 
       {/* Main Content */}

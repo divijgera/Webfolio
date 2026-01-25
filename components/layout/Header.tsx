@@ -38,8 +38,8 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Make header transparent on home page in dark mode only when at top (after mount)
-  const isTransparent = mounted && isHome && resolvedTheme === "dark" && !scrolled;
+  // Make header transparent on home page when at top (after mount) to show Aurora
+  const isTransparent = mounted && isHome && !scrolled;
 
   const handleNavClick = (id?: string) => (event: React.MouseEvent) => {
     if (!isHome || !id) return;
