@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState, memo, useSyncExternalStore } from "react";
+import { useEffect, useState, memo, useSyncExternalStore, useMemo } from "react";
 import { useTheme } from "next-themes";
 import { siteConfig } from "@/lib/constants";
-import LightPillar from "@/components/animations/LightPillar";
+import Aurora from "@/components/animations/Aurora";
 import Antigravity from "@/components/animations/Antigravity";
 
 // Hydration-safe mounted check without useEffect setState
@@ -84,6 +84,9 @@ export function Hero() {
   const { resolvedTheme } = useTheme();
   const isMounted = useSyncExternalStore(emptySubscribe, getSnapshot, getServerSnapshot);
 
+  // Memoize Aurora props to prevent re-renders
+  const auroraColorStops = useMemo(() => ["#3A29FF", "#FF94B4", "#FF3232"], []);
+
   return (
     <section
       id="home"
@@ -94,22 +97,14 @@ export function Hero() {
           : "linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), linear-gradient(to right, #ffffff, #f5f5f5)",
       }}
     >
-      {/* LightPillar Background for Dark Mode */}
+      {/* Aurora Background for Dark Mode */}
       {isMounted && resolvedTheme === "dark" && (
         <div className="absolute inset-0 z-0">
-          <LightPillar
-            topColor="#5227FF"
-            bottomColor="#FF9FFC"
-            intensity={1}
-            rotationSpeed={0.3}
-            glowAmount={0.002}
-            pillarWidth={3}
-            pillarHeight={0.4}
-            noiseIntensity={0.5}
-            pillarRotation={25}
-            interactive={false}
-            mixBlendMode="screen"
-            quality="high"
+          <Aurora
+            colorStops={auroraColorStops}
+            blend={0.5}
+            amplitude={1.0}
+            speed={0.5}
           />
         </div>
       )}

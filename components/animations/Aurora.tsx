@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo, memo } from "react";
 import { Renderer, Program, Mesh, Color, Triangle } from "ogl";
 import { cn } from "@/lib/utils";
 
@@ -119,7 +119,7 @@ interface AuroraProps {
   className?: string;
 }
 
-export default function Aurora(props: AuroraProps) {
+const AuroraInner = memo(function AuroraInner(props: AuroraProps) {
   const {
     colorStops = ["#5227FF", "#7cff67", "#5227FF"],
     amplitude = 1.0,
@@ -130,6 +130,9 @@ export default function Aurora(props: AuroraProps) {
   propsRef.current = props;
 
   const ctnDom = useRef<HTMLDivElement>(null);
+
+  // Memoize colorStops to prevent unnecessary effect re-runs
+  const colorStopsKey = useMemo(() => colorStops.join(","), [colorStops]);
 
   useEffect(() => {
     const ctn = ctnDom.current;
@@ -213,7 +216,9 @@ export default function Aurora(props: AuroraProps) {
       }
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
-  }, [amplitude, blend, colorStops]);
+  }, [amplitude, blend, colorStopsKey, colorStops]);
 
   return <div ref={ctnDom} className={cn("w-full h-full", className)} />;
-}
+});
+
+export default AuroraInner;
