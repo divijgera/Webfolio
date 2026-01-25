@@ -24,7 +24,7 @@ export function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2" style={{ gap: '10rem' }}>
           {/* Get to know me */}
           <div>
-            <h3 className="text-[2.8rem] font-bold text-primary" style={{ marginBottom: '3rem' }}>
+            <h3 className="text-[2.8rem] font-bold text-foreground" style={{ marginBottom: '3rem' }}>
               Get to know me!
             </h3>
             <div className="text-secondary text-[1.8rem] leading-relaxed" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -61,7 +61,7 @@ export function About() {
 
           {/* Skills */}
           <div>
-            <h3 className="text-[2.8rem] font-bold text-primary" style={{ marginBottom: '3rem' }}>
+            <h3 className="text-[2.8rem] font-bold text-foreground" style={{ marginBottom: '3rem' }}>
               My Skills
             </h3>
             <div className="flex flex-wrap">

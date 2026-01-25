@@ -27,13 +27,13 @@ export function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 w-full z-50 bg-white dark:bg-[#111] shadow-sm">
+    <header className="fixed top-0 left-0 right-0 w-full z-50 bg-background shadow-sm">
       <div className="main-container">
         <div className="flex items-center justify-between h-[8rem]">
           {/* Logo */}
           <Link
             href="/"
-            className="text-[2.4rem] font-bold text-[#333] dark:text-white uppercase tracking-wider"
+            className="text-[2.4rem] font-bold text-foreground uppercase tracking-wider"
           >
             {siteConfig.author.name}
           </Link>
@@ -45,7 +45,7 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 onClick={handleNavClick(item.id)}
-                className="text-[1.8rem] font-bold text-[#333] dark:text-white uppercase tracking-wider hover:text-[#0062b9] dark:hover:text-[#60a5fa] transition-colors"
+                className="text-[1.8rem] font-bold text-foreground uppercase tracking-wider hover:text-[#4285F4] transition-colors"
               >
                 {item.name}
               </Link>
@@ -58,7 +58,7 @@ export function Header() {
             <ThemeToggle />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-[#333] dark:text-white"
+              className="p-2 text-foreground"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? (
@@ -73,7 +73,7 @@ export function Header() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white dark:bg-[#111] border-t border-[#eee] dark:border-[#333]">
+        <div className="md:hidden bg-background border-t border-border">
           <div className="main-container py-8">
             <nav className="flex flex-col gap-6">
               {siteConfig.navigation.map((item) => (
@@ -81,7 +81,7 @@ export function Header() {
                   key={item.href}
                   href={item.href}
                   onClick={handleNavClick(item.id)}
-                  className="text-[2rem] font-bold text-[#333] dark:text-white uppercase tracking-wider"
+                  className="text-[2rem] font-bold text-foreground uppercase tracking-wider"
                 >
                   {item.name}
                 </Link>

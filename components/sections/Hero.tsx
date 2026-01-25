@@ -1,44 +1,113 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 import { siteConfig } from "@/lib/constants";
+
+const HERO_ROLES = [
+  "build things for the web",
+  "craft clean, modern UI",
+  "ship full-stack products",
+  "solve complex problems",
+];
 
 /**
  * Hero Section Component - Dopefolio Style
  * Full-height hero with gradient background and centered content
  */
 export function Hero() {
+  const { resolvedTheme } = useTheme();
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [typedText, setTypedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    const fullText = HERO_ROLES[roleIndex];
+    const typingSpeed = 110;
+    const deletingSpeed = 70;
+    const pauseTime = 1600;
+
+    let delay = isDeleting ? deletingSpeed : typingSpeed;
+
+    if (!isDeleting && typedText === fullText) {
+      delay = pauseTime;
+    }
+
+    const timeout = setTimeout(() => {
+      if (!isDeleting && typedText !== fullText) {
+        setTypedText(fullText.slice(0, typedText.length + 1));
+        return;
+      }
+
+      if (isDeleting && typedText !== "") {
+        setTypedText(fullText.slice(0, typedText.length - 1));
+        return;
+      }
+
+      if (!isDeleting && typedText === fullText) {
+        setIsDeleting(true);
+        return;
+      }
+
+      if (isDeleting && typedText === "") {
+        setIsDeleting(false);
+        setRoleIndex((prev) => (prev + 1) % HERO_ROLES.length);
+      }
+    }, delay);
+
+    return () => clearTimeout(timeout);
+  }, [typedText, isDeleting, roleIndex]);
+
   return (
     <section
       id="home"
       className="relative min-h-screen w-full flex items-center justify-center"
       style={{
-        background: "linear-gradient(to right, rgba(17, 17, 17, 0.95), rgba(17, 17, 17, 0.95)), linear-gradient(to right, #111111, #333333)",
+        background: !isMounted || resolvedTheme === "dark"
+          ? "linear-gradient(to right, rgba(17, 17, 17, 0.95), rgba(17, 17, 17, 0.95)), linear-gradient(to right, #111111, #333333)"
+          : "linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), linear-gradient(to right, #ffffff, #f5f5f5)",
       }}
     >
 {/* Main Content */}
       <div className="main-container">
         <div className="flex flex-col items-center justify-center text-center">
           {/* Greeting */}
-          <h1 className="heading-primary mb-10 text-white">
+          <h1 className="heading-primary mb-6">
             Hey, I&apos;m {siteConfig.author.name}
           </h1>
 
+          {/* Typewriter Effect */}
+          <p className="text-[3rem] md:text-[3.6rem] mb-10" style={{ color: "var(--foreground)", opacity: 0.9 }}>
+            I{" "}
+            <span className="inline-flex items-center">
+              {typedText}
+              <span className="ml-1 inline-block h-[1em] w-[3px] bg-[#4285F4] animate-pulse" />
+            </span>
+          </p>
+
           {/* Description */}
-          <p className="max-w-[80rem] mx-auto mb-10 text-white/80 text-[2.2rem] leading-relaxed">
+          <p className="max-w-[80rem] mx-auto mb-16 text-[2rem] leading-relaxed" style={{ color: "var(--foreground)", opacity: 0.7 }}>
             A Full Stack Developer building and managing the Front-end and Back-end of Websites
             and Web Applications that leads to the success of the overall product. Check out my
             work below.
           </p>
 
           {/* CTA Button */}
-          <Link 
-            href="#projects" 
-            className="btn btn--bg"
-            style={{ backgroundColor: '#4285F4', color: 'white' }}
-          >
-            Projects
-          </Link>
+          <div style={{ marginTop: "4rem" }}>
+            <Link 
+              href="#projects" 
+              className="btn btn--bg"
+              style={{ backgroundColor: '#4285F4', color: 'white' }}
+            >
+              Projects
+            </Link>
+          </div>
         </div>
       </div>
 

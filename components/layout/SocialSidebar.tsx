@@ -123,12 +123,16 @@ export function SocialSidebar() {
               );
             })}
             <div
-              className={cn(
-                "w-[2px] h-36 bg-gradient-to-b",
-                isHome
-                  ? "from-border/20 via-border to-border/10"
-                  : "from-background/20 via-background/60 to-background/20 dark:from-border/20 dark:via-border dark:to-border/10"
-              )}
+              className="w-[2px] h-36 opacity-80"
+              style={{
+                backgroundColor: isHome
+                  ? "var(--secondary)"
+                  : isOpen
+                  ? isDark
+                    ? "var(--foreground)"
+                    : "var(--accent)"
+                  : "var(--secondary)",
+              }}
             />
           </div>
         </>

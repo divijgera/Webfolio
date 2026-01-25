@@ -22,7 +22,7 @@ export function Projects() {
         </div>
 
         {/* Project Rows */}
-        <div>
+        <div style={{ marginTop: "5rem" }}>
           {projects.map((project, index) => (
             <div key={project.id} className="projects-row">
               {/* Project Image */}
@@ -45,7 +45,7 @@ export function Projects() {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn btn--med"
+                    className="btn btn--med inline-block"
                     style={{ backgroundColor: '#4285F4', color: 'white' }}
                   >
                     Case Study
@@ -55,7 +55,7 @@ export function Projects() {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn btn--med"
+                    className="btn btn--med inline-block"
                     style={{ backgroundColor: '#4285F4', color: 'white' }}
                   >
                     View Code
@@ -63,7 +63,7 @@ export function Projects() {
                 ) : (
                   <Link 
                     href={`/projects#${project.id}`} 
-                    className="btn btn--med"
+                    className="btn btn--med inline-block"
                     style={{ backgroundColor: '#4285F4', color: 'white' }}
                   >
                     Case Study
