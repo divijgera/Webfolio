@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { siteConfig, socialLinks } from "@/lib/constants";
 
 /**
@@ -29,10 +30,7 @@ export function Footer() {
                       <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                     )}
                     {social.name === "Email" && (
-                      <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
-                    )}
-                    {social.name === "Email" && (
-                      <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
+                      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
                     )}
                   </svg>
                 </a>
@@ -59,12 +57,12 @@ export function Footer() {
         <div className="text-center">
           <p className="text-[1.4rem] text-secondary opacity-70">
             © Copyright {new Date().getFullYear()}. Made by{" "}
-            <a
+            <Link
               href="/"
               className="text-foreground font-semibold hover:underline"
             >
               {siteConfig.author.name}
-            </a>
+            </Link>
           </p>
         </div>
       </div>

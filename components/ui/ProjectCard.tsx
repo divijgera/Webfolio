@@ -1,16 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { ExternalLink, Github } from "lucide-react";
 import { Project } from "@/types";
 
 interface ProjectCardProps {
   project: Project;
-  index: number;
 }
 
-export function ProjectCard({ project, index }: ProjectCardProps) {
+export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <div className="relative w-full aspect-video bg-gradient-to-br from-muted to-muted/50 rounded-lg overflow-hidden">
       {/* Project Image Placeholder - replace with actual image */}

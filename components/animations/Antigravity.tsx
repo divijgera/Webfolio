@@ -1,8 +1,14 @@
 "use client";
 
-import { useRef, useMemo, memo } from "react";
+import { useRef, useMemo, memo, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+
+// Seeded random number generator for consistent results
+function seededRandom(seed: number) {
+  const x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+}
 
 interface ParticlesProps {
   count?: number;
@@ -14,34 +20,33 @@ function Particles({ count = 100, color = "#4285F4" }: ParticlesProps) {
   const mouseRef = useRef({ x: 0, y: 0 });
   const timeRef = useRef(0);
 
-  // Create particle data with fixed home positions
+  // Create particle data with seeded random positions (deterministic)
   const particles = useMemo(() => {
     const temp = [];
     for (let i = 0; i < count; i++) {
-      const homeX = (Math.random() - 0.5) * 14;
-      const homeY = (Math.random() - 0.5) * 10;
-      const homeZ = (Math.random() - 0.5) * 2;
+      const homeX = (seededRandom(i * 3) - 0.5) * 14;
+      const homeY = (seededRandom(i * 3 + 1) - 0.5) * 10;
+      const homeZ = (seededRandom(i * 3 + 2) - 0.5) * 2;
       temp.push({
         home: new THREE.Vector3(homeX, homeY, homeZ),
         position: new THREE.Vector3(homeX, homeY, homeZ),
         offset: new THREE.Vector3(0, 0, 0),
-        scale: Math.random() * 0.4 + 0.25,
-        phase: Math.random() * Math.PI * 2, // For gentle bobbing
-        bobSpeed: 0.3 + Math.random() * 0.2,
-        bobAmount: 0.1 + Math.random() * 0.15,
+        scale: seededRandom(i * 5) * 0.4 + 0.25,
+        phase: seededRandom(i * 7) * Math.PI * 2,
+        bobSpeed: 0.3 + seededRandom(i * 11) * 0.2,
+        bobAmount: 0.1 + seededRandom(i * 13) * 0.15,
       });
     }
     return temp;
   }, [count]);
 
-  // Track mouse
-  useMemo(() => {
-    if (typeof window === "undefined") return;
+  // Track mouse using useEffect (proper side effect handling)
+  useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       mouseRef.current.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouseRef.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
     };
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 

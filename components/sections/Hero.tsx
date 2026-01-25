@@ -1,11 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState, memo } from "react";
+import { useEffect, useState, memo, useSyncExternalStore } from "react";
 import { useTheme } from "next-themes";
 import { siteConfig } from "@/lib/constants";
 import LightPillar from "@/components/animations/LightPillar";
 import Antigravity from "@/components/animations/Antigravity";
+
+// Hydration-safe mounted check without useEffect setState
+const emptySubscribe = () => () => {};
+const getSnapshot = () => true;
+const getServerSnapshot = () => false;
 
 const HERO_ROLES = [
   "build things for the web",
@@ -77,11 +82,7 @@ const Typewriter = memo(function Typewriter() {
  */
 export function Hero() {
   const { resolvedTheme } = useTheme();
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const isMounted = useSyncExternalStore(emptySubscribe, getSnapshot, getServerSnapshot);
 
   return (
     <section

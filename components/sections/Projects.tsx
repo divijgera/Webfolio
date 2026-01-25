@@ -24,7 +24,7 @@ export const Projects = memo(function Projects() {
 
         {/* Project Rows */}
         <div style={{ marginTop: "5rem" }}>
-          {projects.map((project, index) => (
+          {projects.map((project) => (
             <div key={project.id} className="projects-row">
               {/* Project Image */}
               <div className="projects-row__img-cont">

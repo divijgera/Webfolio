@@ -318,16 +318,6 @@ section[id] {
   }
 }
 
-/* Toast progress bar animation */
-@keyframes toast-progress {
-  from { width: 100%; }
-  to { width: 0%; }
-}
-
-.animate-toast-progress {
-  animation: toast-progress 4s linear forwards;
-}
-
 /* ====== Skills badges - Dopefolio Style ====== */
 .skills__skill {
   padding: 1rem 2rem;

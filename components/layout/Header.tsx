@@ -2,11 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
-import { useTheme } from "next-themes";
+import { useState, useEffect, useSyncExternalStore } from "react";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "../ui/ThemeToggle";
 import { siteConfig } from "@/lib/constants";
+
+// Hydration-safe mounted check without useEffect setState
+const emptySubscribe = () => () => {};
+const getSnapshot = () => true;
+const getServerSnapshot = () => false;
 
 /**
  * Header Component - Dopefolio Style
@@ -15,15 +19,9 @@ import { siteConfig } from "@/lib/constants";
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(emptySubscribe, getSnapshot, getServerSnapshot);
   const pathname = usePathname();
   const isHome = pathname === "/";
-  const { resolvedTheme } = useTheme();
-
-  // Prevent hydration mismatch
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   // Track scroll position with throttling
   useEffect(() => {

@@ -3,10 +3,15 @@
 import Link from "next/link";
 import { Github, Linkedin, Mail, Sparkles } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useTheme } from "next-themes";
 import { siteConfig } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+
+// Hydration-safe mounted check without useEffect setState
+const emptySubscribe = () => () => {};
+const getSnapshot = () => true;
+const getServerSnapshot = () => false;
 
 /**
  * Social Sidebar Component
@@ -18,10 +23,11 @@ export function SocialSidebar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
+  const isMounted = useSyncExternalStore(emptySubscribe, getSnapshot, getServerSnapshot);
   const isHome = pathname === "/";
   const isEnabledRoute = isHome || ["/about", "/projects", "/contact"].includes(pathname);
   const isDark = isMounted && resolvedTheme === "dark";
+  const shouldShowPanel = isHome || isOpen;
 
   const socialLinks = [
     {
@@ -36,28 +42,24 @@ export function SocialSidebar() {
     },
     {
       name: "Email",
-      href: `mailto:${siteConfig.author.email}`,
+      href: "mailto:",
       icon: Mail,
     },
   ];
 
-  if (!isEnabledRoute) {
-    return null;
-  }
-
-  const shouldShowPanel = isHome || isOpen;
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
   useEffect(() => {
     if (shouldShowPanel) {
       const id = requestAnimationFrame(() => setIsAnimating(true));
-      return () => cancelAnimationFrame(id);
+      return () => {
+        cancelAnimationFrame(id);
+        setIsAnimating(false);
+      };
     }
-    setIsAnimating(false);
   }, [shouldShowPanel]);
+
+  if (!isEnabledRoute) {
+    return null;
+  }
 
   return (
     <>
@@ -92,8 +94,8 @@ export function SocialSidebar() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  target={link.name !== "Email" ? "_blank" : undefined}
-                  rel={link.name !== "Email" ? "noopener noreferrer" : undefined}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={cn(
                     isHome
                       ? "text-secondary hover:text-[#4285F4]"

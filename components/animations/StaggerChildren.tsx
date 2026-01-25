@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
-import { animations } from "@/lib/constants";
 
 interface StaggerChildrenProps {
   children: ReactNode;
@@ -59,7 +58,7 @@ export function StaggerItem({ children, className }: StaggerItemProps) {
       y: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut",
+        ease: "easeOut" as const,
       },
     },
   };
