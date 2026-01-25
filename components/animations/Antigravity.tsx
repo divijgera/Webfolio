@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, memo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
@@ -103,7 +103,7 @@ interface AntigravityProps {
   particleColor?: string;
 }
 
-export default function Antigravity({
+function Antigravity({
   particleCount = 100,
   particleColor = "#4285F4",
 }: AntigravityProps) {
@@ -119,3 +119,5 @@ export default function Antigravity({
     </div>
   );
 }
+
+export default memo(Antigravity);

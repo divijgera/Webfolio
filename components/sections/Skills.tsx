@@ -1,11 +1,12 @@
 "use client";
 
+import { memo, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Badge } from "../ui/Badge";
 import { skills } from "@/data/skills";
 
-export function Skills() {
-  const containerVariants = {
+export const Skills = memo(function Skills() {
+  const containerVariants = useMemo(() => ({
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -14,9 +15,9 @@ export function Skills() {
         delayChildren: 0.1,
       },
     },
-  };
+  }), []);
 
-  const itemVariants = {
+  const itemVariants = useMemo(() => ({
     hidden: { opacity: 0, scale: 0.8 },
     visible: {
       opacity: 1,
@@ -26,14 +27,14 @@ export function Skills() {
         ease: [0.17, 0.67, 0.83, 0.67] as const,
       },
     },
-  };
+  }), []);
 
-  const categories = {
+  const categories = useMemo(() => ({
     frontend: skills.filter(s => s.category === "frontend"),
     backend: skills.filter(s => s.category === "backend"),
     tools: skills.filter(s => s.category === "tools"),
     other: skills.filter(s => s.category === "other"),
-  };
+  }), []);
 
   return (
     <section id="skills" className="min-h-screen py-16 md:py-24 flex justify-center scroll-mt-24">
@@ -81,4 +82,4 @@ export function Skills() {
       </div>
     </section>
   );
-}
+});

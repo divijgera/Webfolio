@@ -25,14 +25,21 @@ export function Header() {
     setMounted(true);
   }, []);
 
-  // Track scroll position
+  // Track scroll position with throttling
   useEffect(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      // Show solid header after scrolling 100px
-      setScrolled(window.scrollY > 100);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 100);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll(); // Check initial position
     
     return () => window.removeEventListener("scroll", handleScroll);

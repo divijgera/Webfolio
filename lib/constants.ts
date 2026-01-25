@@ -1,14 +1,13 @@
 // Site configuration and constants
 export const siteConfig = {
   name: "Divij Gera",
-  description: "Full Stack Developer | Designer | Problem Solver",
-  url: "https://yoursite.com",
+  description: "Software Engineer",
+  url: "https://divijgera.com",
   author: {
     name: "Divij Gera",
-    email: "your.email@example.com",
-    github: "https://github.com/yourusername",
-    linkedin: "https://linkedin.com/in/yourusername",
-    twitter: "https://twitter.com/yourusername",
+    email: "",
+    github: "https://github.com/divijgera",
+    linkedin: "https://linkedin.com/in/divijgera",
   },
   navigation: [
     { name: "Home", href: "/#home", id: "home" },
@@ -21,9 +20,9 @@ export const siteConfig = {
 
 // Social Links for Dopefolio-style sidebars and footers
 export const socialLinks = [
-  { name: "LinkedIn", url: siteConfig.author.linkedin },
-  { name: "Twitter", url: siteConfig.author.twitter },
   { name: "GitHub", url: siteConfig.author.github },
+  { name: "LinkedIn", url: siteConfig.author.linkedin },
+  { name: "Email", url: `mailto:${siteConfig.author.email}` },
 ];
 
 // Animation configuration

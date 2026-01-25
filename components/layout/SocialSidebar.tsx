@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Github, Linkedin, Twitter, Mail, Sparkles } from "lucide-react";
+import { Github, Linkedin, Mail, Sparkles } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
@@ -33,11 +33,6 @@ export function SocialSidebar() {
       name: "LinkedIn",
       href: siteConfig.author.linkedin,
       icon: Linkedin,
-    },
-    {
-      name: "Twitter",
-      href: siteConfig.author.twitter,
-      icon: Twitter,
     },
     {
       name: "Email",

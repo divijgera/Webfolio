@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import Link from "next/link";
 import { skills } from "@/data/skills";
 
@@ -7,7 +8,7 @@ import { skills } from "@/data/skills";
  * About Section Component - Dopefolio Style
  * Two-column layout: "Get to know me" + "My Skills"
  */
-export function About() {
+export const About = memo(function About() {
   return (
     <section id="about" className="sec-pad bg-muted">
       <div className="main-container">
@@ -29,25 +30,20 @@ export function About() {
             </h3>
             <div className="text-secondary text-[1.8rem] leading-relaxed" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <p>
-                I&apos;m a <strong className="text-foreground">Full Stack Web Developer</strong> building 
-                and managing the Front-end and Back-end of Websites and Web Applications that leads 
-                to the success of the overall product. Check out some of my work in the{" "}
-                <strong className="text-foreground">Projects</strong> section.
+                I&apos;m a <strong className="text-foreground">Software Engineer</strong> currently 
+                working at <strong className="text-foreground">Microsoft</strong> on the Azure Resource 
+                Notifications team, building pub-sub services handling hundreds of billions of notifications daily.
               </p>
               <p>
-                I also like sharing content related to the stuff that I have learned over the years 
-                in <strong className="text-foreground">Web Development</strong> so it can help 
-                other people of the Dev Community. Feel free to Connect or Follow me on my{" "}
-                <a href="https://linkedin.com" className="text-accent underline" target="_blank" rel="noopener noreferrer">
-                  Linkedin
-                </a>{" "}
-                where I post useful content related to Web Development and Programming.
+                Previously at <strong className="text-foreground">Amazon</strong>, I contributed to Lumos, 
+                a cloud-based payment solution handling $2B+ transactions. I have extensive experience with 
+                <strong className="text-foreground"> AWS cloud technologies</strong>, microservices architecture, 
+                and building scalable distributed systems.
               </p>
               <p>
-                I&apos;m open to <strong className="text-foreground">Job</strong> opportunities 
-                where I can contribute, learn and grow. If you have a good opportunity that matches 
-                my skills and experience then don&apos;t hesitate to{" "}
-                <strong className="text-foreground">contact</strong> me.
+                I&apos;m also passionate about <strong className="text-foreground">Deep Learning</strong> and 
+                <strong className="text-foreground"> Computer Vision</strong>, with a published paper at 
+                IEEE ICME 2023 on adversarial robustness in neural networks.
               </p>
             </div>
             <Link
@@ -79,4 +75,4 @@ export function About() {
       </div>
     </section>
   );
-}
+});

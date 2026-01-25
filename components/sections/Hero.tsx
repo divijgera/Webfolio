@@ -139,11 +139,11 @@ export function Hero() {
           {/* CTA Button */}
           <div style={{ marginTop: "4rem" }}>
             <Link 
-              href="#projects" 
+              href="#experience" 
               className="btn btn--bg"
               style={{ backgroundColor: '#4285F4', color: 'white' }}
             >
-              Projects
+              Experience
             </Link>
           </div>
         </div>

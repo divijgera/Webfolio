@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/data/projects";
@@ -8,7 +9,7 @@ import { projects } from "@/data/projects";
  * Projects Section Component - Dopefolio Style
  * Row-based layout with alternating image/content positions
  */
-export function Projects() {
+export const Projects = memo(function Projects() {
   return (
     <section id="projects" className="sec-pad bg-muted">
       <div className="main-container">
@@ -48,7 +49,7 @@ export function Projects() {
                     className="btn btn--med inline-block"
                     style={{ backgroundColor: '#4285F4', color: 'white' }}
                   >
-                    Case Study
+                    Read Publication
                   </a>
                 ) : project.githubUrl ? (
                   <a
@@ -76,4 +77,4 @@ export function Projects() {
       </div>
     </section>
   );
-}
+});
