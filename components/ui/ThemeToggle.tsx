@@ -24,7 +24,7 @@ export function ThemeToggle() {
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       className={cn(
-        "relative h-9 w-9",
+        "relative h-12 w-12",
         "hover:opacity-70 transition-opacity duration-200",
         "focus:outline-none",
         "flex items-center justify-center"
@@ -34,13 +34,13 @@ export function ThemeToggle() {
     >
       <Sun
         className={cn(
-          "h-5 w-5 text-foreground transition-all duration-300",
+          "h-7 w-7 text-foreground transition-all duration-300",
           isDark ? "rotate-90 scale-0" : "rotate-0 scale-100"
         )}
       />
       <Moon
         className={cn(
-          "absolute h-5 w-5 text-foreground transition-all duration-300",
+          "absolute h-7 w-7 text-foreground transition-all duration-300",
           isDark ? "rotate-0 scale-100" : "-rotate-90 scale-0"
         )}
       />
