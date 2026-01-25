@@ -167,9 +167,6 @@ section[id] {
 }
 
 /* ====== Contact - Dopefolio Style ====== */
-.contact {
-  background: var(--muted);
-}
 
 .contact__form-container {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

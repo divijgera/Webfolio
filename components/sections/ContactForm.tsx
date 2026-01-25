@@ -3,7 +3,7 @@
  */
 export function ContactForm() {
   return (
-    <section id="contact" className="contact sec-pad dynamicBg">
+    <section id="contact" className="contact sec-pad bg-background">
       <div className="main-container">
         <h2 className="heading heading-sec heading-sec__mb-med">
           <span className="heading-sec__main">Contact</span>

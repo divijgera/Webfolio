@@ -10,7 +10,7 @@ import { projects } from "@/data/projects";
  */
 export function Projects() {
   return (
-    <section id="projects" className="sec-pad">
+    <section id="projects" className="sec-pad bg-muted">
       <div className="main-container">
         {/* Section Heading */}
         <div className="mb-24">
