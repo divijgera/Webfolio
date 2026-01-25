@@ -9,7 +9,7 @@ export const projects: Project[] = [
     tags: ["PyTorch", "Deep Learning", "Computer Vision", "Neural Networks", "Research"],
     image: "/images/projects/ieee-paper.svg",
     liveUrl: "https://doi.ieeecomputersociety.org/10.1109/ICME55011.2023.00442",
-    githubUrl: "https://github.com",
+    githubUrl: "",
     featured: true,
   },
 ];

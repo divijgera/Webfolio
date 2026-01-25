@@ -22,7 +22,6 @@ export const siteConfig = {
 export const socialLinks = [
   { name: "GitHub", url: siteConfig.author.github },
   { name: "LinkedIn", url: siteConfig.author.linkedin },
-  { name: "Email", url: "mailto:" },
 ];
 
 // Animation configuration
