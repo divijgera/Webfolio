@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { useTheme } from "next-themes";
 import { siteConfig } from "@/lib/constants";
 import LightPillar from "@/components/animations/LightPillar";
@@ -15,19 +15,13 @@ const HERO_ROLES = [
 ];
 
 /**
- * Hero Section Component - Dopefolio Style
- * Full-height hero with gradient background and centered content
+ * Typewriter Component - Isolated to prevent parent re-renders
+ * This component handles its own state updates without affecting siblings
  */
-export function Hero() {
-  const { resolvedTheme } = useTheme();
+const Typewriter = memo(function Typewriter() {
   const [roleIndex, setRoleIndex] = useState(0);
   const [typedText, setTypedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   useEffect(() => {
     const fullText = HERO_ROLES[roleIndex];
@@ -65,6 +59,29 @@ export function Hero() {
 
     return () => clearTimeout(timeout);
   }, [typedText, isDeleting, roleIndex]);
+
+  return (
+    <p className="text-[3rem] md:text-[3.6rem] mb-10" style={{ color: "var(--foreground)", opacity: 0.9 }}>
+      I{" "}
+      <span className="inline-flex items-center">
+        {typedText}
+        <span className="ml-1 inline-block h-[1em] w-[3px] bg-[#4285F4] animate-pulse" />
+      </span>
+    </p>
+  );
+});
+
+/**
+ * Hero Section Component - Dopefolio Style
+ * Full-height hero with gradient background and centered content
+ */
+export function Hero() {
+  const { resolvedTheme } = useTheme();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <section
@@ -109,14 +126,8 @@ export function Hero() {
             Hey, I&apos;m {siteConfig.author.name}
           </h1>
 
-          {/* Typewriter Effect */}
-          <p className="text-[3rem] md:text-[3.6rem] mb-10" style={{ color: "var(--foreground)", opacity: 0.9 }}>
-            I{" "}
-            <span className="inline-flex items-center">
-              {typedText}
-              <span className="ml-1 inline-block h-[1em] w-[3px] bg-[#4285F4] animate-pulse" />
-            </span>
-          </p>
+          {/* Typewriter Effect - Isolated component to prevent re-renders */}
+          <Typewriter />
 
           {/* Description */}
           <p className="max-w-[80rem] mx-auto mb-16 text-[2rem] leading-relaxed" style={{ color: "var(--foreground)", opacity: 0.7 }}>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, memo } from 'react';
 import * as THREE from 'three';
 
 interface LightPillarProps {
@@ -399,4 +399,5 @@ const LightPillar: React.FC<LightPillarProps> = ({
   );
 };
 
-export default LightPillar;
+// Memoize to prevent re-renders from parent state changes
+export default memo(LightPillar);
