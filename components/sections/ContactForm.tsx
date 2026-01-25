@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 // Google Form configuration
 const GOOGLE_FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSeDFp0mteHxzrDnNxk4D2l68HRq_M6nAUOMiLaAphMDeg665Q/formResponse";
@@ -16,51 +16,36 @@ export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Submit via hidden iframe to avoid CORS issues
-    const form = document.createElement("form");
-    form.action = GOOGLE_FORM_ACTION;
-    form.method = "POST";
-    form.target = "hidden_iframe";
+    // Build form data for Google Forms
+    const submitData = new FormData();
+    submitData.append(ENTRY_NAME, formData.name);
+    submitData.append(ENTRY_EMAIL, formData.email);
+    submitData.append(ENTRY_MESSAGE, formData.message);
 
-    // Add fields
-    const nameInput = document.createElement("input");
-    nameInput.type = "hidden";
-    nameInput.name = ENTRY_NAME;
-    nameInput.value = formData.name;
-    form.appendChild(nameInput);
+    try {
+      // Submit using fetch with no-cors mode (fire and forget)
+      await fetch(GOOGLE_FORM_ACTION, {
+        method: "POST",
+        mode: "no-cors",
+        body: submitData,
+      });
+    } catch {
+      // Errors are expected with no-cors, submission still works
+    }
 
-    const emailInput = document.createElement("input");
-    emailInput.type = "hidden";
-    emailInput.name = ENTRY_EMAIL;
-    emailInput.value = formData.email;
-    form.appendChild(emailInput);
-
-    const messageInput = document.createElement("input");
-    messageInput.type = "hidden";
-    messageInput.name = ENTRY_MESSAGE;
-    messageInput.value = formData.message;
-    form.appendChild(messageInput);
-
-    document.body.appendChild(form);
-    form.submit();
-    document.body.removeChild(form);
-
-    // Show success state after a short delay
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormData({ name: "", email: "", message: "" });
-    }, 1000);
+    // Show success state
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    setFormData({ name: "", email: "", message: "" });
   };
 
   const handleReset = () => {
@@ -69,15 +54,6 @@ export function ContactForm() {
 
   return (
     <section id="contact" className="contact sec-pad bg-background">
-      {/* Hidden iframe for form submission */}
-      <iframe
-        ref={iframeRef}
-        name="hidden_iframe"
-        id="hidden_iframe"
-        style={{ display: "none" }}
-        title="Form submission frame"
-      />
-      
       <div className="main-container">
         <h2 className="heading heading-sec heading-sec__mb-med">
           <span className="heading-sec__main">Contact</span>
@@ -94,7 +70,7 @@ export function ContactForm() {
                 </svg>
               </div>
               <h3 className="text-[2.4rem] font-bold text-black mb-3">Thank you!</h3>
-              <p className="text-[1.8rem] text-gray-600 mb-10">
+              <p className="text-[1.8rem] text-gray-600" style={{ marginBottom: "4rem" }}>
                 Your message has been sent successfully. I&apos;ll get back to you soon!
               </p>
               <button
