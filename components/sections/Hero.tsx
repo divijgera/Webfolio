@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { siteConfig } from "@/lib/constants";
+import Aurora from "@/components/animations/Aurora";
 
 const HERO_ROLES = [
   "build things for the web",
@@ -70,12 +71,24 @@ export function Hero() {
       className="relative min-h-screen w-full flex items-center justify-center"
       style={{
         background: !isMounted || resolvedTheme === "dark"
-          ? "linear-gradient(to right, rgba(17, 17, 17, 0.95), rgba(17, 17, 17, 0.95)), linear-gradient(to right, #111111, #333333)"
+          ? "#0a0a0a"
           : "linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), linear-gradient(to right, #ffffff, #f5f5f5)",
       }}
     >
-{/* Main Content */}
-      <div className="main-container">
+      {/* Aurora Background for Dark Mode */}
+      {isMounted && resolvedTheme === "dark" && (
+        <div className="absolute inset-0 z-0">
+          <Aurora
+            colorStops={["#00D4AA", "#7B68EE", "#00FF88"]}
+            blend={0.5}
+            amplitude={1.0}
+            speed={0.5}
+          />
+        </div>
+      )}
+
+      {/* Main Content */}
+      <div className="main-container relative z-10">
         <div className="flex flex-col items-center justify-center text-center">
           {/* Greeting */}
           <h1 className="heading-primary mb-6">

@@ -2,19 +2,44 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "../ui/ThemeToggle";
 import { siteConfig } from "@/lib/constants";
 
 /**
  * Header Component - Dopefolio Style
- * White background, logo left, nav right
+ * Transparent on home (dark mode) to show Aurora, solid when scrolled
  */
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const { resolvedTheme } = useTheme();
+
+  // Prevent hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Track scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      // Show solid header after scrolling 100px
+      setScrolled(window.scrollY > 100);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Check initial position
+    
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Make header transparent on home page in dark mode only when at top (after mount)
+  const isTransparent = mounted && isHome && resolvedTheme === "dark" && !scrolled;
 
   const handleNavClick = (id?: string) => (event: React.MouseEvent) => {
     if (!isHome || !id) return;
@@ -27,7 +52,11 @@ export function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 w-full z-50 bg-background shadow-sm">
+    <header 
+      className={`fixed top-0 left-0 right-0 w-full z-50 transition-colors duration-300 ${
+        isTransparent ? "bg-transparent" : "bg-background shadow-sm"
+      }`}
+    >
       <div className="main-container">
         <div className="flex items-center justify-between h-[8rem]">
           {/* Logo */}
