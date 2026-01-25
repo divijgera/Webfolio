@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { siteConfig } from "@/lib/constants";
-import Aurora from "@/components/animations/Aurora";
+import LightPillar from "@/components/animations/LightPillar";
 import Antigravity from "@/components/animations/Antigravity";
 
 const HERO_ROLES = [
@@ -76,14 +76,22 @@ export function Hero() {
           : "linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), linear-gradient(to right, #ffffff, #f5f5f5)",
       }}
     >
-      {/* Aurora Background for Dark Mode */}
+      {/* LightPillar Background for Dark Mode */}
       {isMounted && resolvedTheme === "dark" && (
         <div className="absolute inset-0 z-0">
-          <Aurora
-            colorStops={["#00D4AA", "#7B68EE", "#00FF88"]}
-            blend={0.5}
-            amplitude={1.0}
-            speed={0.5}
+          <LightPillar
+            topColor="#5227FF"
+            bottomColor="#FF9FFC"
+            intensity={1}
+            rotationSpeed={0.3}
+            glowAmount={0.002}
+            pillarWidth={3}
+            pillarHeight={0.4}
+            noiseIntensity={0.5}
+            pillarRotation={25}
+            interactive={false}
+            mixBlendMode="screen"
+            quality="high"
           />
         </div>
       )}
