@@ -86,7 +86,7 @@ export function Experience() {
           {experiences.map((exp) => (
             <div key={exp.companyKey} className="relative">
               {/* Lanyard Container with Background Text */}
-              <div className="relative bg-muted rounded-2xl overflow-hidden border border-border">
+              <div className="relative bg-muted rounded-2xl overflow-hidden border border-border" style={{ marginBottom: '1rem' }}>
                 {/* Background Text */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-8 pointer-events-none select-none z-0">
                   <h3 className="text-[3rem] md:text-[4rem] font-bold text-foreground/40 dark:text-foreground/30 uppercase tracking-wider">
@@ -191,7 +191,7 @@ export function Experience() {
               </div>
 
               {/* Simplified Footer - Company Name, Tenure, Read More */}
-              <div className="mt-6 flex items-center justify-between">
+              <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <h3 className="text-[2.2rem] font-bold text-foreground">
                     {exp.company}
