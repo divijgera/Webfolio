@@ -13,17 +13,23 @@ export const siteConfig = {
   navigation: [
     { name: "Home", href: "/#home", id: "home" },
     { name: "About", href: "/#about", id: "about" },
-    { name: "Skills", href: "/#skills", id: "skills" },
     { name: "Projects", href: "/#projects", id: "projects" },
     { name: "Contact", href: "/#contact", id: "contact" },
   ],
 };
 
+// Social Links for Dopefolio-style sidebars and footers
+export const socialLinks = [
+  { name: "LinkedIn", url: siteConfig.author.linkedin },
+  { name: "Twitter", url: siteConfig.author.twitter },
+  { name: "GitHub", url: siteConfig.author.github },
+];
+
 // Animation configuration
 export const animations = {
   pageTransition: {
     duration: 0.3,
-    ease: [0.17, 0.67, 0.83, 0.67],
+    ease: [0.17, 0.67, 0.83, 0.67] as const,
   },
   fadeIn: {
     initial: { opacity: 0, y: 20 },

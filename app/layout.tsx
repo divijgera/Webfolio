@@ -1,24 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
-import { SmoothScrollProvider } from "@/components/layout/SmoothScrollProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SocialSidebar } from "@/components/layout/SocialSidebar";
-import { Atmosphere } from "@/components/layout/Atmosphere";
 import { siteConfig } from "@/lib/constants";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const sourceSans = Source_Sans_3({
+  variable: "--font-source-sans",
   subsets: ["latin"],
   display: "swap",
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -66,26 +59,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${sourceSans.variable} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <SmoothScrollProvider>
-            <div className="flex flex-col min-h-screen w-full">
-              <Header />
-              <Atmosphere />
-              <main className="flex-1 w-full">
-                {children}
-              </main>
-              <Footer />
-              <SocialSidebar />
-            </div>
-          </SmoothScrollProvider>
+          <Header />
+          <SocialSidebar />
+          <main>{children}</main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

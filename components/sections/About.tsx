@@ -1,62 +1,81 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Link from "next/link";
+import { skills } from "@/data/skills";
 
+/**
+ * About Section Component - Dopefolio Style
+ * Two-column layout: "Get to know me" + "My Skills"
+ */
 export function About() {
   return (
-    <section id="about" className="min-h-screen pt-4 pb-16 md:pb-24 flex justify-center scroll-mt-24">
-      <div className="w-[95%] max-w-screen-2xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center"
-        >
-          {/* Text Content */}
-          <div className="space-y-6 w-full lg:flex-1 text-center lg:text-left">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-              About Me
-            </h2>
-            
-            <div className="space-y-4 text-secondary text-base md:text-lg leading-relaxed">
+    <section id="about" className="sec-pad bg-muted">
+      <div className="main-container">
+        {/* Section Heading */}
+        <div style={{ marginBottom: '11rem' }}>
+          <h2 className="heading-sec__main">About Me</h2>
+          <p className="heading-sec__sub">
+            Here you will find more information about me, what I do, and my
+            current skills mostly in terms of programming and technology
+          </p>
+        </div>
+
+        {/* Two Column Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-2" style={{ gap: '10rem' }}>
+          {/* Get to know me */}
+          <div>
+            <h3 className="text-[2.8rem] font-bold text-primary" style={{ marginBottom: '3rem' }}>
+              Get to know me!
+            </h3>
+            <div className="text-secondary text-[1.8rem] leading-relaxed" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <p>
-                Hi! I&apos;m a passionate full-stack developer who loves creating beautiful and functional web applications. My journey in web development started several years ago, and I&apos;ve been hooked ever since.
+                I&apos;m a <strong className="text-foreground">Full Stack Web Developer</strong> building 
+                and managing the Front-end and Back-end of Websites and Web Applications that leads 
+                to the success of the overall product. Check out some of my work in the{" "}
+                <strong className="text-foreground">Projects</strong> section.
               </p>
-              
               <p>
-                I specialize in building modern, responsive applications using cutting-edge technologies. Whether it&apos;s crafting pixel-perfect user interfaces or architecting scalable backend systems, I enjoy every aspect of the development process.
+                I also like sharing content related to the stuff that I have learned over the years 
+                in <strong className="text-foreground">Web Development</strong> so it can help 
+                other people of the Dev Community. Feel free to Connect or Follow me on my{" "}
+                <a href="https://linkedin.com" className="text-accent underline" target="_blank" rel="noopener noreferrer">
+                  Linkedin
+                </a>{" "}
+                where I post useful content related to Web Development and Programming.
               </p>
-              
               <p>
-                When I&apos;m not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community. I believe in continuous learning and staying up-to-date with industry trends.
-              </p>
-              
-              <p>
-                I&apos;m currently open to new opportunities and collaborations. If you have an interesting project or just want to connect, feel free to reach out!
+                I&apos;m open to <strong className="text-foreground">Job</strong> opportunities 
+                where I can contribute, learn and grow. If you have a good opportunity that matches 
+                my skills and experience then don&apos;t hesitate to{" "}
+                <strong className="text-foreground">contact</strong> me.
               </p>
             </div>
+            <Link
+              href="#contact"
+              className="btn btn--med inline-block"
+              style={{ backgroundColor: '#4285F4', color: 'white', marginTop: '4rem' }}
+            >
+              Contact
+            </Link>
           </div>
 
-          {/* Profile Image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="w-full lg:flex-1 flex justify-center"
-          >
-            <div className="relative aspect-square w-full max-w-md rounded-2xl overflow-hidden bg-accent/10 border-2 border-accent/20">
-              {/* Placeholder for profile image */}
-              <div className="absolute inset-0 flex items-center justify-center text-secondary">
-                <div className="text-center">
-                  <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-accent/20" />
-                  <p className="text-sm">Add your profile image here</p>
-                </div>
-              </div>
+          {/* Skills */}
+          <div>
+            <h3 className="text-[2.8rem] font-bold text-primary" style={{ marginBottom: '3rem' }}>
+              My Skills
+            </h3>
+            <div className="flex flex-wrap">
+              {skills.map((skill) => (
+                <span
+                  key={skill.name}
+                  className="skills__skill"
+                >
+                  {skill.name}
+                </span>
+              ))}
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

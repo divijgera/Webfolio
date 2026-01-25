@@ -1,10 +1,5 @@
-import { ContactForm } from "@/components/sections/ContactForm";
-import { PageWrapper } from "@/components/layout/PageWrapper";
+import { redirect } from "next/navigation";
 
 export default function ContactPage() {
-  return (
-    <PageWrapper>
-      <ContactForm />
-    </PageWrapper>
-  );
+  redirect("/#contact");
 }
