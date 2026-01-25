@@ -7,7 +7,7 @@ export const siteConfig = {
     name: "Divij Gera",
     email: "",
     github: "https://github.com/divijgera",
-    linkedin: "https://linkedin.com/in/divijgera",
+    linkedin: "https://linkedin.com/in/divij-gera",
   },
   navigation: [
     { name: "Home", href: "/#home", id: "home" },
