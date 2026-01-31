@@ -291,7 +291,7 @@ section[id] {
 .mouse {
   width: 25px;
   height: 40px;
-  border: 2px solid rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(0, 0, 0, 0.5);
   border-radius: 60px;
   position: relative;
   overflow: hidden;
@@ -305,10 +305,19 @@ section[id] {
   top: 7px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 50%;
   opacity: 1;
   animation: wheel 1.3s infinite;
+}
+
+/* Dark mode - use white colors */
+.dark .mouse {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.dark .mouse::before {
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 @keyframes wheel {
