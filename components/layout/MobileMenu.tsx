@@ -178,7 +178,7 @@ export function MobileMenu({ isOpen, onClose, onNavClick }: MobileMenuProps) {
                   className="group flex items-center gap-6 py-4"
                 >
                   {/* Number */}
-                  <span className="text-[1.2rem] text-black/60 dark:text-white/30 font-mono tabular-nums">
+                  <span className="mobile-menu__index text-[1.2rem] font-mono tabular-nums">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   {/* Label */}

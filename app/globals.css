@@ -272,6 +272,15 @@ section[id] {
   border: none;
 }
 
+/* ====== Mobile Menu ====== */
+.mobile-menu__index {
+  color: #000000;
+}
+
+:root.dark .mobile-menu__index {
+  color: #ffffff;
+}
+
 .btn:hover {
   transform: translateY(-3px);
 }
