@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useEffect, useState, memo, useSyncExternalStore, useMemo } from "react";
 import { useTheme } from "next-themes";
 import { siteConfig } from "@/lib/constants";
-import Aurora from "@/components/animations/Aurora";
 import Antigravity from "@/components/animations/Antigravity";
+import LightPillar from "@/components/animations/LightPillar";
 
 // Hydration-safe mounted check without useEffect setState
 const emptySubscribe = () => () => {};
@@ -84,8 +84,22 @@ export function Hero() {
   const { resolvedTheme } = useTheme();
   const isMounted = useSyncExternalStore(emptySubscribe, getSnapshot, getServerSnapshot);
 
-  // Memoize Aurora props to prevent re-renders
-  const auroraColorStops = useMemo(() => ["#3A29FF", "#FF94B4", "#FF3232"], []);
+  const lightPillarConfig = useMemo(
+    () => ({
+      topColor: "#5A5BFF",
+      bottomColor: "#FF7FD8",
+      intensity: 1.15,
+      rotationSpeed: 0.25,
+      interactive: false,
+      glowAmount: 0.006,
+      pillarWidth: 3.2,
+      pillarHeight: 0.42,
+      noiseIntensity: 0.45,
+      pillarRotation: 0,
+      quality: "low" as const,
+    }),
+    []
+  );
 
   return (
     <section
@@ -97,21 +111,18 @@ export function Hero() {
           : "linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), linear-gradient(to right, #ffffff, #f5f5f5)",
       }}
     >
-      {/* Aurora Background for Dark Mode */}
+      {/* LightPillar Background for Dark Mode */}
       {isMounted && resolvedTheme === "dark" && (
         <div className="absolute inset-0 z-0">
-          <Aurora
-            colorStops={auroraColorStops}
-            blend={0.5}
-            amplitude={1.0}
-            speed={0.5}
-          />
+          <div className="absolute inset-0 pointer-events-none opacity-90">
+            <LightPillar {...lightPillarConfig} />
+          </div>
         </div>
       )}
 
       {/* Antigravity Particles for Light Mode */}
       {isMounted && resolvedTheme === "light" && (
-        <Antigravity particleCount={80} particleColor="#4285F4" />
+        <Antigravity particleCount={100} particleColor="#4285F4" />
       )}
 
       {/* Main Content */}

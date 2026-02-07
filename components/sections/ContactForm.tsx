@@ -69,8 +69,8 @@ export function ContactForm() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h3 className="text-[2.4rem] font-bold text-black mb-3">Thank you!</h3>
-              <p className="text-[1.8rem] text-gray-600" style={{ marginBottom: "4rem" }}>
+              <h3 className="text-[2.4rem] font-bold mb-3" style={{ color: "var(--primary)" }}>Thank you!</h3>
+              <p className="text-[1.8rem]" style={{ color: "var(--secondary)", marginBottom: "4rem" }}>
                 Your message has been sent successfully. I&apos;ll get back to you soon!
               </p>
               <button

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  /* Light mode colors - Dopefolio style */
+  /* Light mode colors */
   --background: #ffffff;
   --foreground: #333333;
   --primary: #000000;
@@ -70,7 +70,7 @@ section[id] {
   scroll-margin-top: 80px;
 }
 
-/* ====== Layout Utilities - Dopefolio Style ====== */
+/* ====== Layout Utilities ====== */
 .main-container {
   max-width: 120rem;
   margin: 0 auto;
@@ -87,7 +87,7 @@ section[id] {
   }
 }
 
-/* ====== Headings - Dopefolio Style ====== */
+/* ====== Headings ====== */
 .heading-primary {
   font-size: 6rem;
   text-transform: uppercase;
@@ -166,11 +166,12 @@ section[id] {
   }
 }
 
-/* ====== Contact - Dopefolio Style ====== */
+/* ====== Contact ====== */
 
 .contact__form-container {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+  background: var(--card);
+  border: 1px solid var(--border);
   padding: 4rem;
   margin-top: 6rem;
   max-width: 80rem;
@@ -197,7 +198,7 @@ section[id] {
 }
 
 .contact__form-label {
-  color: #666;
+  color: #111111;
   font-size: 1.4rem;
   letter-spacing: 1px;
   font-weight: 700;
@@ -207,19 +208,19 @@ section[id] {
 }
 
 .contact__form-input {
-  color: #333;
+  color: #111111;
   padding: 2rem;
   width: 100%;
-  border: 1px solid #ebebeb;
+  border: 1px solid var(--border);
   font-size: 1.6rem;
   letter-spacing: 0px;
-  background: #f0f0f0;
+  background: var(--muted);
   border-radius: 5px;
   font-weight: 600;
 }
 
 .contact__form-input::placeholder {
-  color: #999;
+  color: var(--secondary);
   font-weight: 600;
   font-size: 1.6rem;
 }
@@ -230,13 +231,33 @@ section[id] {
   font-size: 1.6rem;
 }
 
+:root.dark .contact__form-container {
+  background: #121212;
+  border-color: #1f1f1f;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+:root.dark .contact__form-label {
+  color: #ffffff;
+}
+
+:root.dark .contact__form-input {
+  background: #0f0f0f;
+  border-color: #1f1f1f;
+  color: #ffffff;
+}
+
+:root.dark .contact__form-input::placeholder {
+  color: #8b909a;
+}
+
 @media (max-width: 37.5em) {
   .contact__btn {
     width: 100%;
   }
 }
 
-/* ====== Buttons - Dopefolio Style ====== */
+/* ====== Buttons ====== */
 .btn {
   background: white;
   color: #333;
@@ -327,7 +348,7 @@ section[id] {
   }
 }
 
-/* ====== Skills badges - Dopefolio Style ====== */
+/* ====== Skills badges ====== */
 .skills__skill {
   padding: 1rem 2rem;
   margin-bottom: 1.5rem;
@@ -340,7 +361,7 @@ section[id] {
   display: inline-block;
 }
 
-/* ====== Project Row - Dopefolio Style ====== */
+/* ====== Project Row ====== */
 .projects-row {
   display: flex;
   align-items: center;
