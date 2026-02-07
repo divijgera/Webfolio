@@ -132,7 +132,7 @@ function Antigravity({
     return isLowPower ? Math.min(80, capped) : capped;
   }, [particleCount, isLowPower]);
 
-  const dpr = useMemo(() => (isLowPower ? [1, 1] : [1, 1.25]), [isLowPower]);
+  const dpr = useMemo(() => (isLowPower ? [1, 1] : [1, 1.25]) as [number, number], [isLowPower]);
 
   return (
     <div className="absolute inset-0 z-0">
