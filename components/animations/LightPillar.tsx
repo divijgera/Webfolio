@@ -62,11 +62,11 @@ const LightPillar: React.FC<LightPillarProps> = ({
       low: { iterations: 24, waveIterations: 1, pixelRatio: 0.5, precision: 'mediump' as const, stepMultiplier: 1.5 },
       medium: { iterations: 40, waveIterations: 2, pixelRatio: 0.65, precision: 'mediump' as const, stepMultiplier: 1.2 },
       high: {
-        iterations: 80,
-        waveIterations: 4,
-        pixelRatio: Math.min(window.devicePixelRatio, 2),
+        iterations: 48,
+        waveIterations: 2,
+        pixelRatio: Math.min(window.devicePixelRatio, 1.0),
         precision: 'highp' as const,
-        stepMultiplier: 1.0
+        stepMultiplier: 1.1
       }
     };
 
