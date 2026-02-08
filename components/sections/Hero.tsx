@@ -96,7 +96,7 @@ export function Hero() {
       pillarHeight: 0.42,
       noiseIntensity: 0.45,
       pillarRotation: 0,
-      quality: "low" as const,
+      quality: "high" as const,
     }),
     []
   );
