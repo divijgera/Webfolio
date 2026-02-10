@@ -6,6 +6,7 @@ import { useTheme } from "next-themes";
 import { siteConfig } from "@/lib/constants";
 import Antigravity from "@/components/animations/Antigravity";
 import LightPillar from "@/components/animations/LightPillar";
+import Aurora from "@/components/animations/Aurora";
 
 // Hydration-safe mounted check without useEffect setState
 const emptySubscribe = () => () => {};
@@ -83,6 +84,17 @@ const Typewriter = memo(function Typewriter() {
 export function Hero() {
   const { resolvedTheme } = useTheme();
   const isMounted = useSyncExternalStore(emptySubscribe, getSnapshot, getServerSnapshot);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Client-side mobile detection with resize listener
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const lightPillarConfig = useMemo(
     () => ({
@@ -101,6 +113,17 @@ export function Hero() {
     []
   );
 
+  // Aurora config for mobile - vibrant red and blue
+  const auroraConfig = useMemo(
+    () => ({
+      colorStops: ["#0066FF", "#FF0066", "#0066FF"],
+      amplitude: 1.4,
+      blend: 0.5,
+      speed: 1.0,
+    }),
+    []
+  );
+
   return (
     <section
       id="home"
@@ -111,12 +134,19 @@ export function Hero() {
           : "linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), linear-gradient(to right, #ffffff, #f5f5f5)",
       }}
     >
-      {/* LightPillar Background for Dark Mode */}
-      {isMounted && resolvedTheme === "dark" && (
+      {/* LightPillar Background for Dark Mode (desktop only) */}
+      {isMounted && resolvedTheme === "dark" && !isMobile && (
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 pointer-events-none opacity-90">
             <LightPillar {...lightPillarConfig} />
           </div>
+        </div>
+      )}
+
+      {/* Aurora Background for Dark Mode (mobile only) */}
+      {isMounted && resolvedTheme === "dark" && isMobile && (
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Aurora {...auroraConfig} className="opacity-80" />
         </div>
       )}
 
